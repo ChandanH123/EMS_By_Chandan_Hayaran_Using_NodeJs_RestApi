@@ -14,8 +14,8 @@ NOTE:
   4. Need to start the Xampp server for the MySQL database at localhost.
   5. Create database with name "ems" using phpMyAdmin dashboard.
   6. Create table "employees" with fields 
-      a. "emp_id" - Int(primary key).
-      b. "emp_firstName" - Varchar/String.
-      c. "emp_lastName" - Varchar/String.
-      d. "emp_contactNumber" - Varchar/String.
-      e. "emp_gender" - Varchar/String).
+      1. "emp_id" - Int(primary key).
+      2. "emp_firstName" - Varchar/String.
+      3. "emp_lastName" - Varchar/String.
+      4. "emp_contactNumber" - Varchar/String.
+      5. "emp_gender" - Varchar/String).
