@@ -5,6 +5,8 @@ The technology used in this project are:
   2. NodeJS - Backend
   3. MySQL - Database
 
+Architecture Used: MVVM (Model-View-ViewModel)
+
 NOTE: 
   1. Need to run the "app.js" file using the NodeJS server from the terminal at localhost.
   2. Need to start the Xampp server for the MySQL database at localhost.
