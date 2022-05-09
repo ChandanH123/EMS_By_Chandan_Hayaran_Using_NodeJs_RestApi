@@ -13,7 +13,7 @@ NOTE:
   3. Need to run the "app.js" file using the NodeJS server from the terminal at localhost.
   4. Need to start the Xampp server for the MySQL database at localhost.
   5. Create database with name "ems" using phpMyAdmin dashboard.
-  6. Create table "employees" with fields 
+  6. Create table "employees" with fields. 
       1. "emp_id" - Int(primary key).
       2. "emp_firstName" - Varchar/String.
       3. "emp_lastName" - Varchar/String.
