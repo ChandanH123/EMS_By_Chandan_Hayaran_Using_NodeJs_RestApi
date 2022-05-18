@@ -20,7 +20,7 @@ conn.connect();
 
 app.get('/', (req, res) => {
     return res.json({
-        error: false, 
+        error: false,
         message: 'Welcome to RESTfull api with node js for EMS.'
     });
 })
@@ -32,15 +32,26 @@ app.get('/getAllEmployees', (req, res) => {
         let message = ""
         if (results === undefined || results.length == 0) {
             message = "employees table is empty.";
+            
+            return res
+            .status(400)
+            .json({
+                error: true,
+                message: message,
+                data: []
+            });
         } else {
             message = "Successfully retrived all employees.";
+            return res
+            .status(200)
+            .json({
+                error: false,
+                message: message,
+                data: results
+            });
         }
 
-        return res.json({
-            error: false,
-            message: message,
-            data: results
-        });
+        
     })
 })
 
@@ -53,15 +64,18 @@ app.post('/createEmployee', (req, res) => {
     if (!emp_firstName || !emp_lastName || !emp_contactNumber || !emp_gender) {
         return res
         .status(400)
-        .send({
+        .json({
             error: true,
-            message: "Please provide employee's firstName, lastName, contactNumber and gender."
+            message: "Please provide employee's firstName, lastName, contactNumber and gender.",
+            data: []
         });
     } else {
         let values = [emp_firstName, emp_lastName, emp_contactNumber, emp_gender];
         conn.query('INSERT INTO employees (emp_firstName, emp_lastName, emp_contactNumber, emp_gender) VALUES(?, ?, ?, ?)', values, (error, results, fields) => {
             if (error) throw error;
-            return res.send({
+            return res
+            .status(200)
+            .json({
                 error: false,
                 message: 'Employee successfully added.',
                 data: []
@@ -80,9 +94,10 @@ app.put('/updateEmployee', (req, res) => {
     if (!emp_id || !emp_firstName || !emp_lastName || !emp_contactNumber || !emp_gender) {
         return res
         .status(400)
-        .send({
+        .json({
             error: true,
-            message: "Please provide employee's id, firstName, lastName, contactNumber and gender."
+            message: "Please provide employee's id, firstName, lastName, contactNumber and gender.",
+            data: []
         });
     } else {
         let values = [emp_firstName, emp_lastName, emp_contactNumber, emp_gender, emp_id];
@@ -92,15 +107,25 @@ app.put('/updateEmployee', (req, res) => {
             let message = ""
             if (results.changedRows === 0) {
                 message = "Employee not found or data are same."
+                return res
+                .status(400)
+                .json({
+                    error: true,
+                    message: message,
+                    data: []
+                })
             } else {
                 message = "Employee successfully updated."
+                return res
+                .status(200)
+                .json({
+                    error: false,
+                    message: message,
+                    data: []
+                })
             }
 
-            return res.send({
-                error: false,
-                message: message,
-                data: []
-            })
+            
         });
     }
 })
@@ -112,9 +137,10 @@ app.delete('/deleteEmployee', (req, res) => {
     if (!emp_id) {
         return res
         .status(400)
-        .send({
+        .json({
             error: true,
-            message: "Please provide employee id."
+            message: "Please provide employee id!",
+            data: []
         });
 
     } else {
@@ -125,19 +151,30 @@ app.delete('/deleteEmployee', (req, res) => {
             let message = "";
 
             if (results.affectedRows === 0) {
-                message = "Employee not found";
+                message = "Employee not found!";
+                return res
+                .status(400)
+                .json({
+                    error: true,
+                    message: message,
+                    data: []
+                })
             } else {
-                message = "Employee successfully deleted";
+                message = "Employee successfully deleted.";
+                return res
+                .status(200)
+                .json({
+                    error: false,
+                    message: message,
+                    data: []
+                })
             }
 
-            return res.send({
-                error: false,
-                message: message,
-                data: []
-            })
+            
         });
     }
 })
+
 
 
 app.listen(port, () => {
