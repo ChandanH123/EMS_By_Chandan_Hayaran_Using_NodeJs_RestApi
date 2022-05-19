@@ -14,59 +14,30 @@ struct RowView: View {
 
     var body: some View {
         ZStack {
-            Rectangle()
-                .foregroundColor(.blue)
-                .frame(height: 100)
-                .cornerRadius(50)
-            
-       
-            HStack {
+           HStack {
                 Image(employee.emp_gender)
                     .resizable()
                     .scaledToFit()
-                    .cornerRadius(8)
                     .frame(width: 70, height: 70)
+                    .overlay(Circle()
+                                .stroke(Color("Capgi_Light_Blue"), lineWidth: 4))
+                            .shadow(radius: 1)
                 
                 Text("\(employee.emp_firstName) \(employee.emp_lastName)")
                         .font(.headline)
-                        .foregroundColor(.white)
+                        .foregroundColor(Color("Capgi_Dark_Blue"))
                         .fontWeight(.bold)
                 Spacer()
                 }
-            .padding()
-                
-    
+            .padding(5)
         }
+        
     }
 }
 
 struct RowView_Previews: PreviewProvider {
     static var previews: some View {
-       
-            ZStack {
-                Rectangle()
-                    .foregroundColor(.blue)
-                    .frame(height: 100)
-                    .cornerRadius(50)
-                
-           
-                HStack {
-                    Image("Male")
-                        .resizable()
-                        .scaledToFit()
-                        .cornerRadius(8)
-                        .frame(width: 70, height: 70)
-                    
-                        Text("Rohit Hayaran")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .fontWeight(.bold)
-                    Spacer()
-                    }
-                .padding()
-                    
-        
-            }
+        RowView(employee: EmployeeModel(emp_id: 01, emp_firstName: "Rohit", emp_lastName: "Hayaran", emp_contactNumber: "1234567890", emp_gender: "Male"))
         }
     
 }

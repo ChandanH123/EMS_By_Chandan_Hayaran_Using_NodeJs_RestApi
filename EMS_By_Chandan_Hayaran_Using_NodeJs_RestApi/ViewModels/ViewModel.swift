@@ -177,5 +177,16 @@ class ViewModel: ObservableObject {
             
         }.resume()
     }
+    
+    
+    func deleteEmployeeRow(indexSet: IndexSet) {
+        let emp_id = indexSet.map {items[$0].emp_id }
+    
+        DispatchQueue.main.async {
+            let parameters: [String: Any] = ["emp_id": emp_id[0]]
+            self.deleteEmployee(parameters: parameters)
+            self.getAllEmployees()
+        }
+    }
 
 }

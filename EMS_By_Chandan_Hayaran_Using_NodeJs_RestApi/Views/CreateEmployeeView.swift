@@ -12,10 +12,11 @@ struct CreateEmployeeView: View {
     @EnvironmentObject var viewModel: ViewModel
 
     @Binding var isPresentedCreateEmployee: Bool
-    @Binding var emp_firstName: String
-    @Binding var emp_lastName: String
-    @Binding var emp_contactNumber: String
-    @Binding var emp_gender: String
+    
+    @State var emp_firstName = ""
+    @State var emp_lastName = ""
+    @State var emp_contactNumber = ""
+    @State var emp_gender = "Male"
     
     @State var isAlert = false
     
@@ -28,7 +29,7 @@ struct CreateEmployeeView: View {
                label: {
                     ZStack(alignment: .center) {
                             Rectangle()
-                                .foregroundColor(.blue)
+                            .foregroundColor(Color("Capgi_Dark_Blue"))
                                 .frame(width: 130, height: 50)
                                 .cornerRadius(30)
                             
@@ -57,7 +58,7 @@ struct CreateEmployeeView: View {
                label: {
                     ZStack(alignment: .center) {
                             Rectangle()
-                                .foregroundColor(.blue)
+                                .foregroundColor(Color("Capgi_Dark_Blue"))
                                 .frame(width: 130, height: 50)
                                 .cornerRadius(30)
                             
@@ -69,14 +70,15 @@ struct CreateEmployeeView: View {
     }
     
     var body: some View {
-        NavigationView {
+       
             ZStack {
                 Color.black.ignoresSafeArea(.all)
+                
                 VStack(alignment: .leading, spacing: 20) {
                     ZStack(alignment: .center) {
                             Rectangle()
-                                .foregroundColor(.blue)
-                                .frame(height: 100)
+                            .foregroundColor(Color("Capgi_Dark_Blue"))
+                                .frame(height: 70)
                                 .cornerRadius(50)
                             
                             Text("Add Employee")
@@ -90,6 +92,10 @@ struct CreateEmployeeView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 150, height: 150)
+                            .overlay(Circle()
+                                        .stroke(Color("Capgi_Light_Blue"), lineWidth: 7))
+                            .shadow(radius: 1)
+                        
                         Spacer()
                     }
                     
@@ -140,9 +146,6 @@ struct CreateEmployeeView: View {
                         return Alert(title: title, message: message)
                     })
             }
-            .navigationBarHidden(true)
-            
-        }
         
     }
 }
@@ -150,6 +153,7 @@ struct CreateEmployeeView: View {
 
 struct CreateEmployeeView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateEmployeeView(isPresentedCreateEmployee: .constant(true), emp_firstName: .constant("Chandan"), emp_lastName: .constant("Hayaran"), emp_contactNumber: .constant("7748064046"), emp_gender: .constant("Male"))
+        CreateEmployeeView(isPresentedCreateEmployee: .constant(true))
+            .environmentObject(ViewModel())
     }
 }

@@ -31,7 +31,7 @@ struct UpdateEmployeeView: View {
                label: {
                     ZStack(alignment: .center) {
                             Rectangle()
-                                .foregroundColor(.blue)
+                            .foregroundColor(Color("Capgi_Dark_Blue"))
                                 .frame(width: 130, height: 50)
                                 .cornerRadius(30)
                             
@@ -61,7 +61,7 @@ struct UpdateEmployeeView: View {
                label: {
                     ZStack(alignment: .center) {
                             Rectangle()
-                                .foregroundColor(.blue)
+                            .foregroundColor(Color("Capgi_Dark_Blue"))
                                 .frame(width: 130, height: 50)
                                 .cornerRadius(30)
                             
@@ -73,14 +73,13 @@ struct UpdateEmployeeView: View {
     }
     
     var body: some View {
-        NavigationView {
             ZStack {
                 Color.black.ignoresSafeArea(.all)
                 VStack(alignment: .leading, spacing: 20) {
                     ZStack(alignment: .center) {
                             Rectangle()
-                                .foregroundColor(.blue)
-                                .frame(height: 100)
+                            .foregroundColor(Color("Capgi_Dark_Blue"))
+                                .frame(height: 70)
                                 .cornerRadius(50)
                             
                             Text("Update Employee")
@@ -94,6 +93,10 @@ struct UpdateEmployeeView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 150, height: 150)
+                            .overlay(Circle()
+                                        .stroke(Color("Capgi_Light_Blue"), lineWidth: 7))
+                            .shadow(radius: 1)
+                        
                         Spacer()
                     }
                     
@@ -152,15 +155,14 @@ struct UpdateEmployeeView: View {
                 
                 
             }
-            .navigationBarHidden(true)
             
-        }
         
     }
 }
 
-//struct UpdateEmployeeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        UpdateEmployeeView(isPresentedCreateEmployee: .constant(true), emp_firstName: .constant("Chandan"), emp_lastName: .constant("Hayaran"), emp_contactNumber: .constant("7748064046"), emp_gender: .constant("male"))
-//    }
-//}
+struct UpdateEmployeeView_Previews: PreviewProvider {
+    static var previews: some View {
+        UpdateEmployeeView(item: EmployeeModel(emp_id: 01, emp_firstName: "Rohit", emp_lastName: "Hayaran", emp_contactNumber: "1234567890", emp_gender: "Male"))
+            .environmentObject(ViewModel())
+    }
+}
