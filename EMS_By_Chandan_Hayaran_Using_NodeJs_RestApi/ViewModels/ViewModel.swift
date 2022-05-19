@@ -17,6 +17,16 @@ class ViewModel: ObservableObject {
     }
     
 
+    func searchByName(searchInput: String) {
+        print(searchInput)
+        
+        print(searchInput.isEmpty)
+
+        let result = searchInput.isEmpty ? self.items : self.items.filter{ $0.emp_firstName.range(of: searchInput, options: .caseInsensitive) != nil }
+        print(result)
+        // self.items = result
+    }
+    
     func sortAZ() {
         items.sort(by: { $0.emp_firstName < $1.emp_firstName })
     }

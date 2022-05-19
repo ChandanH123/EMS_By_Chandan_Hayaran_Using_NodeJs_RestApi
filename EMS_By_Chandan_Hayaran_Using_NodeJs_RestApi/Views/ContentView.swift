@@ -13,7 +13,6 @@ struct ContentView: View {
     @EnvironmentObject var viewModel: ViewModel
     
     @State var isPresentedCreateEmployee = false
-    @State var isPresentedSearchBox = false
     
     var body: some View {
 
@@ -22,7 +21,7 @@ struct ContentView: View {
                 VStack {
                     
                     // MARK: - Header Section Start
-                    HeaderSectionView(isPresentedCreateEmployee: $isPresentedCreateEmployee, isPresentedSearchBox: $isPresentedSearchBox)
+                    HeaderSectionView(isPresentedCreateEmployee: $isPresentedCreateEmployee)
                     // MARK: - Header Section End
                     
                     

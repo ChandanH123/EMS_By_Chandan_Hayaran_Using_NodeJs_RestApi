@@ -9,8 +9,10 @@ import SwiftUI
 
 struct HeaderSectionView: View {
     
+    @EnvironmentObject var viewModel: ViewModel
+    
     @Binding var isPresentedCreateEmployee: Bool
-    @Binding var isPresentedSearchBox: Bool
+    @State var isPresentedSearchBox = false
     @State var searchInput = "Search..."
     
     var plusCircleButton: some View {
@@ -66,6 +68,12 @@ struct HeaderSectionView: View {
                         TextField("Search...", text: $searchInput)
                             .foregroundColor(.white)
                             .padding()
+                            .disableAutocorrection(true)
+                            .textInputAutocapitalization(.never)
+                            .onChange(of: searchInput) { searchNewInput in
+                                viewModel.searchByName(searchInput: searchNewInput)
+                                
+                                        }
                     }
                     .opacity(isPresentedSearchBox ? 1 : 0)
                 }
@@ -91,7 +99,8 @@ struct HeaderSectionView: View {
 
 struct HeaderSectionView_Previews: PreviewProvider {
     static var previews: some View {
-        HeaderSectionView(isPresentedCreateEmployee: .constant(false), isPresentedSearchBox: .constant(false))
+        HeaderSectionView(isPresentedCreateEmployee: .constant(false))
             .previewLayout(.sizeThatFits)
+            .environmentObject(ViewModel())
     }
 }
