@@ -16,6 +16,23 @@ class ViewModel: ObservableObject {
         getAllEmployees()
     }
     
+
+    func sortAZ() {
+        items.sort(by: { $0.emp_firstName < $1.emp_firstName })
+    }
+
+    func sortZA() {
+        items.sort(by: { $0.emp_firstName > $1.emp_firstName })
+    }
+    
+    func sortLatest() {
+        items.sort(by: { $0.emp_id > $1.emp_id })
+    }
+
+    func sortEarliest() {
+        items.sort(by: { $0.emp_id < $1.emp_id })
+    }
+
     //MARK: - get all employees
     func getAllEmployees() {
         guard let url = URL(string: "\(prefixUrl)/getAllEmployees") else {
@@ -34,6 +51,7 @@ class ViewModel: ObservableObject {
                     let result = try JSONDecoder().decode(DataModel.self, from: data)
                     DispatchQueue.main.async {
                         self.items = result.data
+                        self.sortLatest()
                     }
                 }
                 else {

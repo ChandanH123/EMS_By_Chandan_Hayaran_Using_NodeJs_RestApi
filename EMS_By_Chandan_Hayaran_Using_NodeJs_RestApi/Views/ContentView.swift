@@ -27,19 +27,45 @@ struct ContentView: View {
     }
     var body: some View {
         NavigationView {
-            List {
-                ForEach(viewModel.items, id: \.emp_id  ) { item in
-                    NavigationLink(
-                        destination: UpdateEmployeeView(item: item),
-                        label: {                                RowView(employee: item)
-                        })
+            
+            ZStack(alignment: .bottomTrailing) {
+                List {
+//                    ForEach(viewModel.items, id: \.emp_id  ) { item in
+//                        NavigationLink(
+//                            destination: UpdateEmployeeView(item: item),
+//                            label: {                                RowView(employee: item)
+//                            })
+//                    }
+//                    .onDelete(perform: deleteEmployee)
+
                 }
-                .onDelete(perform: deleteEmployee)
+                .listStyle(.inset)
+                .navigationBarTitle("Employees")
+            .navigationBarItems(trailing: plusCircleButton)
+                
+                ZStack {
+                    Rectangle()
+                        .foregroundColor(.red)
+                        .frame(width: 80, height: 50)
+                        .cornerRadius(30)
+                    Menu(("Filter".uppercased())) {
+                        
+                        Button("Sort Z-A", action: { viewModel.sortZA()})
+                        
+                        Button("Sort A-Z", action: { viewModel.sortAZ()})
+                               
+                        Button("Sort Earliest", action: { viewModel.sortEarliest()})
+                    
+                        Button("Sort Latest", action: { viewModel.sortLatest()})
+                    }
+                    .foregroundColor(.white)
+                    .font(Font.system(size: 15, weight: .bold))
+                }
+                .padding()
+                
                 
             }
-            .listStyle(.inset)
-            .navigationBarTitle("Employees")
-            .navigationBarItems(trailing: plusCircleButton)
+            
         }
         .sheet(isPresented: $isPresentedCreateEmployee, content: {
             CreateEmployeeView(isPresentedCreateEmployee: $isPresentedCreateEmployee, emp_firstName: $emp_firstName, emp_lastName: $emp_lastName, emp_contactNumber: $emp_contactNumber, emp_gender: $emp_gender)
