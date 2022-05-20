@@ -14,6 +14,7 @@ struct ContentView: View {
     
     @State var isPresentedCreateEmployee = false
     
+    
     var body: some View {
 
             NavigationView {
@@ -27,7 +28,7 @@ struct ContentView: View {
                     
                     
                     // MARK: - Center Section Start
-                        CenterSectionView()
+                    CenterSectionView()
                     // MARK: - Center Section End
                     
                     .navigationBarHidden(true)

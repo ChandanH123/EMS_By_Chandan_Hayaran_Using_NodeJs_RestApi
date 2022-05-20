@@ -11,11 +11,13 @@ struct CenterSectionView: View {
     
     @EnvironmentObject var viewModel: ViewModel
     
+    
+    
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             
             List {
-                    ForEach(viewModel.items, id: \.emp_id  ) { item in
+                ForEach(viewModel.items.filter({ "\($0)".localizedCaseInsensitiveContains(viewModel.searchText) || viewModel.searchText.isEmpty }), id: \.emp_id  ) { item in
                         NavigationLink(
                             destination: UpdateEmployeeView(item: item),
                             label: {                                RowView(employee: item)

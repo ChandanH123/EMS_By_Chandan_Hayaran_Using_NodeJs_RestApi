@@ -12,8 +12,9 @@ struct HeaderSectionView: View {
     @EnvironmentObject var viewModel: ViewModel
     
     @Binding var isPresentedCreateEmployee: Bool
-    @State var isPresentedSearchBox = false
-    @State var searchInput = "Search..."
+    
+    
+    
     
     var plusCircleButton: some View {
         Button(action: { print("plusCircleButton Pressed.")
@@ -32,7 +33,8 @@ struct HeaderSectionView: View {
     var searchButton: some View {
         Button(action: { print("searchButton Pressed.")
             withAnimation(.spring()) {
-            isPresentedSearchBox.toggle()
+                viewModel.isPresentedSearchBox.toggle()
+                
             }
         },
                label: { ZStack {
@@ -57,30 +59,35 @@ struct HeaderSectionView: View {
                     Image("capgi_logo")
                         .resizable()
                         .frame(width: 200, height: 44)
-                        .opacity(isPresentedSearchBox ? 0 : 1)
+                        .opacity(viewModel.isPresentedSearchBox ? 0 : 1)
                 
-                    ZStack {
-                        Rectangle()
-                            .foregroundColor(Color("Capgi_Dark_Blue"))
-                            .frame(height: 50)
-                            .cornerRadius(30)
-                    
-                        TextField("Search...", text: $searchInput)
-                            .foregroundColor(.white)
-                            .padding()
-                            .disableAutocorrection(true)
-                            .textInputAutocapitalization(.never)
-                            .onChange(of: searchInput) { searchNewInput in
-                                viewModel.searchByName(searchInput: searchNewInput)
-                                
-                                        }
-                    }
-                    .opacity(isPresentedSearchBox ? 1 : 0)
+                    SearchBarView()
+                        .opacity(viewModel.isPresentedSearchBox ? 1 : 0)
                 }
                 
                 Spacer()
                     
-                plusCircleButton
+                ZStack {
+                    plusCircleButton
+                        .opacity(viewModel.isPresentedSearchBox ? 0 : 1)
+                    
+                    Button(action: {
+                        withAnimation(.spring()) {
+                            viewModel.isSearching.toggle()
+                            viewModel.searchText = ""
+                            viewModel.isPresentedSearchBox.toggle()
+                        }
+                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                        
+                    }, label: {
+                        Text("Cancel")
+                            
+                            
+                    })
+                    
+                    .opacity(viewModel.isPresentedSearchBox ? 1 : 0)
+                    
+                }
                 
                 
                 

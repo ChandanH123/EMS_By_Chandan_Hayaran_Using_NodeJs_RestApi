@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		172FDBB3283769A600C34153 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172FDBB2283769A600C34153 /* SearchBarView.swift */; };
 		174727A52826BE7A002756B9 /* RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174727A42826BE7A002756B9 /* RowView.swift */; };
 		17D264AF283684ED00393F35 /* FilterButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D264AE283684ED00393F35 /* FilterButtonView.swift */; };
 		17D264B12836856100393F35 /* CenterSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17D264B02836856100393F35 /* CenterSectionView.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		172FDBB2283769A600C34153 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		174727A12826A603002756B9 /* EMS-By-Chandan-Hayaran-Using-NodeJs-RestApi-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "EMS-By-Chandan-Hayaran-Using-NodeJs-RestApi-Info.plist"; sourceTree = SOURCE_ROOT; };
 		174727A42826BE7A002756B9 /* RowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowView.swift; sourceTree = "<group>"; };
 		17D264AE283684ED00393F35 /* FilterButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterButtonView.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				17D264AE283684ED00393F35 /* FilterButtonView.swift */,
 				17D264B02836856100393F35 /* CenterSectionView.swift */,
 				17D264B2283685A300393F35 /* HeaderSectionView.swift */,
+				172FDBB2283769A600C34153 /* SearchBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				17FEBB6528268BFB006D3C8D /* CreateEmployeeView.swift in Sources */,
 				17FEBB6728269E32006D3C8D /* UpdateEmployeeView.swift in Sources */,
 				17FEBB60282684C3006D3C8D /* ViewModel.swift in Sources */,
+				172FDBB3283769A600C34153 /* SearchBarView.swift in Sources */,
 				17D264AF283684ED00393F35 /* FilterButtonView.swift in Sources */,
 				17FEBB4E28268351006D3C8D /* EMS_By_Chandan_Hayaran_Using_NodeJs_RestApiApp.swift in Sources */,
 				17D264B3283685A300393F35 /* HeaderSectionView.swift in Sources */,
