@@ -39,7 +39,9 @@ struct SearchBarView: View {
                     Spacer()
                     
                     if viewModel.isSearching {
-                        Button(action: { viewModel.searchText = "" }, label: {
+                        Button(action: {
+                            searchText = ""
+                             }, label: {
                             Image(systemName: "xmark.circle.fill")
                                 .padding(.vertical)
                         })
