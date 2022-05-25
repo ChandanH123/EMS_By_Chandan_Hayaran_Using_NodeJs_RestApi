@@ -12,9 +12,9 @@ struct CreateEmployeeView: View {
     @EnvironmentObject var viewModel: ViewModel
 
     
-    var cancelButton: some View {
+    var backButton: some View {
         Button(action: {
-            print("Cancel Button Pressed.")
+            print("Back Button Pressed.")
             viewModel.getAllEmployees()
             viewModel.isPresentedCreateEmployee.toggle()
                 },
@@ -25,7 +25,7 @@ struct CreateEmployeeView: View {
                                 .frame(width: 130, height: 50)
                                 .cornerRadius(30)
                             
-                            Text("Cancel")
+                            Text("Back")
                                 .foregroundColor(.white)
                         }
                 }
@@ -147,7 +147,7 @@ struct CreateEmployeeView: View {
 
                     
                     HStack {
-                        cancelButton
+                        backButton
                         Spacer()
                         addButton
                     }

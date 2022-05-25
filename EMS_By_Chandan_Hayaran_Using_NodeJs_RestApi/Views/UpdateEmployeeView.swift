@@ -16,9 +16,9 @@ struct UpdateEmployeeView: View {
     let item: EmployeeModel
     
     
-    var cancelButton: some View {
+    var backButton: some View {
         Button(action: {
-            print("Cancel Button Pressed.")
+            print("Back Button Pressed.")
             
             viewModel.getAllEmployees()
             presentationMode.wrappedValue.dismiss()
@@ -30,7 +30,7 @@ struct UpdateEmployeeView: View {
                                 .frame(width: 130, height: 50)
                                 .cornerRadius(30)
                             
-                            Text("Cancel")
+                            Text("Back")
                                 .foregroundColor(.white)
                         }
                 }
@@ -152,7 +152,7 @@ struct UpdateEmployeeView: View {
 
                     
                     HStack {
-                        cancelButton
+                        backButton
                         Spacer()
                         updateButton
                     }
@@ -170,6 +170,7 @@ struct UpdateEmployeeView: View {
                 
                 
             }
+            .navigationBarHidden(true)
             
         
     }
