@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import Combine
+import SwiftUI
 
 
 class ViewModel: ObservableObject {
@@ -16,11 +18,40 @@ class ViewModel: ObservableObject {
     @Published var searchText = ""
     @Published var isSearching = false
     
+    @Published var isPresentedCreateEmployee = false
+    
+    @Published var emp_firstName = ""
+    @Published var emp_lastName = ""
+    @Published var emp_contactNumber = ""
+    @Published var emp_gender = "Male"
+    
+
+    @Published var fieldValidationFirstNameIcon = ""
+    @Published var fieldValidationLastNameIcon = ""
+    @Published var fieldValidationContactNumberIcon = ""
+    
+    
     let prefixUrl = "http://localhost:8080"
     
     init() {
         getAllEmployees()
+        
+        $emp_firstName
+            .map { $0.isEmpty ? "❗️" : "✅" }
+            .assign(to: &$fieldValidationFirstNameIcon)
+
+        $emp_lastName
+            .map { $0.isEmpty ? "❗️" : "✅" }
+            .assign(to: &$fieldValidationLastNameIcon)
+
+        $emp_contactNumber
+            .map { $0.isEmpty ? "❗️" : "✅" }
+            .assign(to: &$fieldValidationContactNumberIcon)
+        
     }
+    
+    
+
     
 
     func sortAZ() {

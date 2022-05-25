@@ -11,20 +11,12 @@ struct CreateEmployeeView: View {
     
     @EnvironmentObject var viewModel: ViewModel
 
-    @Binding var isPresentedCreateEmployee: Bool
-    
-    @State var emp_firstName = ""
-    @State var emp_lastName = ""
-    @State var emp_contactNumber = ""
-    @State var emp_gender = "Male"
-    
-    @State var isAlert = false
     
     var cancelButton: some View {
         Button(action: {
             print("Cancel Button Pressed.")
             viewModel.getAllEmployees()
-            isPresentedCreateEmployee.toggle()
+            viewModel.isPresentedCreateEmployee.toggle()
                 },
                label: {
                     ZStack(alignment: .center) {
@@ -43,16 +35,14 @@ struct CreateEmployeeView: View {
     var addButton: some View {
         Button(action: {
                 print("Add Button Pressed.")
-            if (emp_firstName != "" && emp_lastName != "" && emp_contactNumber != "" && emp_gender != "") {
+            if (viewModel.emp_firstName != "" && viewModel.emp_lastName != "" && viewModel.emp_contactNumber != "" && viewModel.emp_gender != "") {
                 
-                let parameters: [String: Any] = ["emp_firstName": emp_firstName, "emp_lastName": emp_lastName, "emp_contactNumber": emp_contactNumber, "emp_gender": emp_gender ]
+                let parameters: [String: Any] = ["emp_firstName": viewModel.emp_firstName, "emp_lastName": viewModel.emp_lastName, "emp_contactNumber": viewModel.emp_contactNumber, "emp_gender": viewModel.emp_gender ]
+                
                 viewModel.createEmployee(parameters: parameters)
                 viewModel.getAllEmployees()
                 
-                isPresentedCreateEmployee.toggle()
-            }
-            else {
-                isAlert.toggle()
+                viewModel.isPresentedCreateEmployee.toggle()
             }
                 },
                label: {
@@ -88,7 +78,7 @@ struct CreateEmployeeView: View {
                     
                     HStack {
                         Spacer()
-                        Image(self.emp_gender)
+                        Image(viewModel.emp_gender)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 150, height: 150)
@@ -99,27 +89,53 @@ struct CreateEmployeeView: View {
                         Spacer()
                     }
                     
-                    TextField("First Name", text: $emp_firstName)
-                        .padding()
-                        .background(.white)
-                        .cornerRadius(6)
-                        .disableAutocorrection(true)
                     
-                    TextField("Last Name", text: $emp_lastName)
+                    TextField("First name", text: $viewModel.emp_firstName)
                         .padding()
                         .background(.white)
-                        .cornerRadius(6)
                         .disableAutocorrection(true)
+                        .border(.red, width: viewModel.emp_firstName.isEmpty ? 5 : 0)
+                        .overlay(
+                            HStack {
+                                Spacer()
+                                Text(viewModel.fieldValidationFirstNameIcon)
+                            }
+                            .padding()
+                        )
                     
-                    TextField("Contact Number", text: $emp_contactNumber)
+                        
+                        
+                    TextField("Last name", text: $viewModel.emp_lastName)
                         .padding()
                         .background(.white)
-                        .cornerRadius(6)
                         .disableAutocorrection(true)
+                        .border(.red, width: viewModel.emp_lastName.isEmpty ? 5 : 0)
+                        .overlay(
+                            HStack {
+                                Spacer()
+                                Text(viewModel.fieldValidationLastNameIcon)
+                            }
+                            .padding()
+                        )
+                        
+                    
+                    TextField("Contact number", text: $viewModel.emp_contactNumber)
+                        .padding()
+                        .background(.white)
+                        .disableAutocorrection(true)
+                        .border(.red, width: viewModel.emp_contactNumber.isEmpty ? 5 : 0)
+                        .overlay(
+                            HStack {
+                                Spacer()
+                                Text(viewModel.fieldValidationContactNumberIcon)
+                            }
+                            .padding()
+                        )
+                        
                     
                     HStack {
                         Spacer()
-                        Picker(selection: $emp_gender, label: Text("Gender")) {
+                        Picker(selection: $viewModel.emp_gender, label: Text("Gender")) {
                             Text("Male").tag("Male")
                             Text("Female").tag("Female")
                         }
@@ -140,11 +156,6 @@ struct CreateEmployeeView: View {
                     
                     
                 }.padding()
-                    .alert(isPresented: $isAlert, content: {
-                        let title = Text("No Data.")
-                        let message = Text("Please fill all fields.")
-                        return Alert(title: title, message: message)
-                    })
             }
         
     }
@@ -153,7 +164,7 @@ struct CreateEmployeeView: View {
 
 struct CreateEmployeeView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateEmployeeView(isPresentedCreateEmployee: .constant(true))
+        CreateEmployeeView()
             .environmentObject(ViewModel())
     }
 }

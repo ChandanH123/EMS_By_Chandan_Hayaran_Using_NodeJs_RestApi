@@ -10,14 +10,13 @@ import SwiftUI
 struct SearchBarView: View {
     
     @EnvironmentObject var viewModel: ViewModel
-    
-    @State var searchText = ""
+
     
     var body: some View {
         HStack(alignment: .center, spacing: 0) {
             
             HStack {
-                TextField("Search terms here", text: $searchText)
+                TextField("Search terms here", text: $viewModel.searchText)
                     .padding(.leading, 24)
                     .textInputAutocapitalization(.never)
                     .disableAutocorrection(true)
@@ -29,7 +28,7 @@ struct SearchBarView: View {
             .onTapGesture(perform: {
                 viewModel.isSearching = true
             })
-            .onChange(of: searchText) {
+            .onChange(of: viewModel.searchText) {
                 searchTextNew in
                 viewModel.searchText = searchTextNew
             }
@@ -40,7 +39,7 @@ struct SearchBarView: View {
                     
                     if viewModel.isSearching {
                         Button(action: {
-                            searchText = ""
+                            viewModel.searchText = ""
                              }, label: {
                             Image(systemName: "xmark.circle.fill")
                                 .padding(.vertical)
@@ -63,9 +62,7 @@ struct SearchBarView: View {
 
 struct SearchBarView_Previews: PreviewProvider {
     static var previews: some View {
-//        SearchBarView()
-//            .environmentObject(ViewModel())
-        HeaderSectionView(isPresentedCreateEmployee: .constant(false))
+        SearchBarView()
             .environmentObject(ViewModel())
     }
 }

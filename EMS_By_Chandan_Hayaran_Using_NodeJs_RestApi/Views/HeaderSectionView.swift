@@ -11,14 +11,9 @@ struct HeaderSectionView: View {
     
     @EnvironmentObject var viewModel: ViewModel
     
-    @Binding var isPresentedCreateEmployee: Bool
-    
-    
-    
-    
     var plusCircleButton: some View {
         Button(action: { print("plusCircleButton Pressed.")
-            isPresentedCreateEmployee.toggle()
+            viewModel.isPresentedCreateEmployee.toggle()
         },
                label: { ZStack {
             Rectangle()
@@ -101,12 +96,15 @@ struct HeaderSectionView: View {
                 .offset(y: 8)
             
         }
+        .sheet(isPresented: $viewModel.isPresentedCreateEmployee, content: {
+            CreateEmployeeView()
+    })
     }
 }
 
 struct HeaderSectionView_Previews: PreviewProvider {
     static var previews: some View {
-        HeaderSectionView(isPresentedCreateEmployee: .constant(false))
+        HeaderSectionView()
             .previewLayout(.sizeThatFits)
             .environmentObject(ViewModel())
     }

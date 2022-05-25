@@ -15,16 +15,11 @@ struct UpdateEmployeeView: View {
     
     let item: EmployeeModel
     
-    @State var emp_firstName = ""
-    @State var emp_lastName = ""
-    @State var emp_contactNumber = ""
-    @State var emp_gender = ""
-    
-    @State var isAlert = false
     
     var cancelButton: some View {
         Button(action: {
             print("Cancel Button Pressed.")
+            
             viewModel.getAllEmployees()
             presentationMode.wrappedValue.dismiss()
                 },
@@ -46,17 +41,16 @@ struct UpdateEmployeeView: View {
         Button(action: {
                 print("Update Button Pressed.")
             
-            if (emp_firstName != "" && emp_lastName != "" && emp_contactNumber != "" && emp_gender != "") {
+            if (viewModel.emp_firstName != "" && viewModel.emp_lastName != "" && viewModel.emp_contactNumber != "" && viewModel.emp_gender != "") {
                 
-                let parameters: [String: Any] = ["emp_id": item.emp_id,"emp_firstName": emp_firstName, "emp_lastName": emp_lastName, "emp_contactNumber": emp_contactNumber, "emp_gender": emp_gender ]
+                let parameters: [String: Any] = ["emp_id": item.emp_id, "emp_firstName": viewModel.emp_firstName, "emp_lastName": viewModel.emp_lastName, "emp_contactNumber": viewModel.emp_contactNumber, "emp_gender": viewModel.emp_gender ]
+                
                 viewModel.updateEmployee(parameters: parameters)
                 viewModel.getAllEmployees()
                 
                 presentationMode.wrappedValue.dismiss()
             }
-            else {
-                isAlert.toggle()
-            }
+           
                 },
                label: {
                     ZStack(alignment: .center) {
@@ -89,7 +83,7 @@ struct UpdateEmployeeView: View {
                     
                     HStack {
                         Spacer()
-                        Image(self.emp_gender)
+                        Image(viewModel.emp_gender)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 150, height: 150)
@@ -100,27 +94,53 @@ struct UpdateEmployeeView: View {
                         Spacer()
                     }
                     
-                    TextField("First Name", text: $emp_firstName)
+                    TextField("First name", text: $viewModel.emp_firstName)
                         .padding()
                         .background(.white)
-                        .cornerRadius(6)
                         .disableAutocorrection(true)
+                        .border(.red, width: viewModel.emp_firstName.isEmpty ? 5 : 0)
+                        .overlay(
+                            HStack {
+                                Spacer()
+                                Text(viewModel.fieldValidationFirstNameIcon)
+                            }
+                            .padding()
+                        )
                     
-                    TextField("Last Name", text: $emp_lastName)
+                        
+                        
+                    TextField("Last name", text: $viewModel.emp_lastName)
                         .padding()
                         .background(.white)
-                        .cornerRadius(6)
                         .disableAutocorrection(true)
+                        .border(.red, width: viewModel.emp_lastName.isEmpty ? 5 : 0)
+                        .overlay(
+                            HStack {
+                                Spacer()
+                                Text(viewModel.fieldValidationLastNameIcon)
+                            }
+                            .padding()
+                        )
+                        
                     
-                    TextField("Contact Number", text: $emp_contactNumber)
+                    TextField("Contact number", text: $viewModel.emp_contactNumber)
                         .padding()
                         .background(.white)
-                        .cornerRadius(6)
                         .disableAutocorrection(true)
+                        .border(.red, width: viewModel.emp_contactNumber.isEmpty ? 5 : 0)
+                        .overlay(
+                            HStack {
+                                Spacer()
+                                Text(viewModel.fieldValidationContactNumberIcon)
+                            }
+                            .padding()
+                        )
+                        
+                        
                     
                     HStack {
                         Spacer()
-                        Picker(selection: $emp_gender, label: Text("Gender")) {
+                        Picker(selection: $viewModel.emp_gender, label: Text("Gender")) {
                             Text("Male").tag("Male")
                             Text("Female").tag("Female")
                         }
@@ -142,15 +162,10 @@ struct UpdateEmployeeView: View {
                     
                 }.padding()
                     .onAppear(perform: {
-                        self.emp_firstName = item.emp_firstName
-                        self.emp_lastName = item.emp_lastName
-                        self.emp_contactNumber = item.emp_contactNumber
-                        self.emp_gender = item.emp_gender
-                    })
-                    .alert(isPresented: $isAlert, content: {
-                        let title = Text("No Data.")
-                        let message = Text("Please fill all fields.")
-                        return Alert(title: title, message: message)
+                        viewModel.emp_firstName = item.emp_firstName
+                        viewModel.emp_lastName = item.emp_lastName
+                        viewModel.emp_contactNumber = item.emp_contactNumber
+                        viewModel.emp_gender = item.emp_gender
                     })
                 
                 

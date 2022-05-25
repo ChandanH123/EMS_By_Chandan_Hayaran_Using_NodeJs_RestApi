@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct FilterButtonView: View {
+    
     @EnvironmentObject var viewModel: ViewModel
     
     var body: some View {

@@ -12,8 +12,7 @@ struct ContentView: View {
 
     @EnvironmentObject var viewModel: ViewModel
     
-    @State var isPresentedCreateEmployee = false
-    
+
     
     var body: some View {
 
@@ -22,7 +21,7 @@ struct ContentView: View {
                 VStack {
                     
                     // MARK: - Header Section Start
-                    HeaderSectionView(isPresentedCreateEmployee: $isPresentedCreateEmployee)
+                    HeaderSectionView()
                     // MARK: - Header Section End
                     
                     
@@ -35,9 +34,7 @@ struct ContentView: View {
                 
                 }
             }
-            .sheet(isPresented: $isPresentedCreateEmployee, content: {
-                CreateEmployeeView(isPresentedCreateEmployee: $isPresentedCreateEmployee)
-        })
+            
         
     }
     
