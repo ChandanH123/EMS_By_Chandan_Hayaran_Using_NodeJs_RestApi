@@ -13,7 +13,13 @@ struct HeaderSectionView: View {
     
     var plusCircleButton: some View {
         Button(action: { print("plusCircleButton Pressed.")
+            
+            viewModel.emp_firstName = ""
+            viewModel.emp_lastName = ""
+            viewModel.emp_contactNumber = ""
+            viewModel.emp_gender = "Male"
             viewModel.isPresentedCreateEmployee.toggle()
+        
         },
                label: { ZStack {
             Rectangle()

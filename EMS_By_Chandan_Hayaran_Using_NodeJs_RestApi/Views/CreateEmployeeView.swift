@@ -40,7 +40,6 @@ struct CreateEmployeeView: View {
                 let parameters: [String: Any] = ["emp_firstName": viewModel.emp_firstName, "emp_lastName": viewModel.emp_lastName, "emp_contactNumber": viewModel.emp_contactNumber, "emp_gender": viewModel.emp_gender ]
                 
                 viewModel.createEmployee(parameters: parameters)
-                viewModel.getAllEmployees()
                 
                 viewModel.isPresentedCreateEmployee.toggle()
             }

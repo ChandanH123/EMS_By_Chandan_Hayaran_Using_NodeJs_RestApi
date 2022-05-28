@@ -46,7 +46,6 @@ struct UpdateEmployeeView: View {
                 let parameters: [String: Any] = ["emp_id": item.emp_id, "emp_firstName": viewModel.emp_firstName, "emp_lastName": viewModel.emp_lastName, "emp_contactNumber": viewModel.emp_contactNumber, "emp_gender": viewModel.emp_gender ]
                 
                 viewModel.updateEmployee(parameters: parameters)
-                viewModel.getAllEmployees()
                 
                 presentationMode.wrappedValue.dismiss()
             }
